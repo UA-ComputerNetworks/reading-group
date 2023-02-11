@@ -1,0 +1,171 @@
+#+OPTIONS: toc:nil reveal_width:1400 reveal_height:1000
+#+REVEAL_THEME: black
+
+# Set up the title slide.
+# Note the %n at the end to inject speaker notes.
+#+REVEAL_TITLE_SLIDE: <h1>%t</h1><h3>%s</h3><h4>%A %a</h4><p>View online: <a href="%u">%u</a></p> %n
+
+# Define contents of speaker notes on title slide.
+#+REVEAL_TITLE_SLIDE_NOTES: config-title-notes.org
+
+# Configure individual pieces of information.
+#+Title: L2D2
+#+Subtitle: low latency distributed downlink for LEO satellites
+#+Author: George C. G. Barbosa.
+#+REVEAL_ACADEMIC_TITLE:
+#+REVEAL_TALK_URL: https://gcgbarbosa.com/l2d2
+#+REVEAL_TALK_QR_CODE: does not exist
+#+OPTIONS: ^:nil
+
+# add slide
+# remove numbering from slides
+#+OPTIONS: num:nil
+
+# set slide numbering format
+#+OPTIONS: reveal_slide_number:c/t
+
+* What is it?
+L2D2 is a geographically distributed ground station design.
+
+# talk about
+# 1. image satellites
+# 2. diff from internet
+# 3. downlink is the most important
+
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/satellite-image.jpg]]
+
+* L2D2 Goals
+
+The goal of L2D2 is to serve as a ground station fabric
+spread across the planet that can downlink data from satellites from
+multiple providers
+
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/l2d2.png]]
+
+
+* Why? (1/3)
+
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/elev-azim.png]]
+
+** Why? (2/3)
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/contact-length.png]]
+
+In the dataset with 259 satellites,
+a ground station may see up to 100 satellites (median 14) at
+the same instant.
+
+** Why? (3/3)
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/contacts-day.png]]
+
+* What?
+- Downlink Latency
+- Scaling
+- Robustness
+- High coust of entry
+- Adaptative Downlink Scheduling
+- Rate selection
+- Satellite feedback
+
+* How?
+The aim is: to find a scheduling algorithm that can optimize a pre-defined value function across time and across all satelliteground station pairs.
+
+** Problem Formulation
+- Lets assume we have a set of satellites $S = {s_1, s_2, ... ,s_M}
+- Each satellite $s_i$ is defined by a TLE.
+- The authors define the value function $\phi(x, t)$ which models the amount of data transmited to earth.
+- Where $x \in X_i^t$ is the subset of bits that can be transfered from the satellite to the ground station.
+
+** Orbit Calculation
+
+- Obtains the most recent TLE for each satellite
+- Use TLE to compute future orbits
+- distance, elevation and azimuth angle are fed to the model
+
+** Scheduling Algorithm
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/alg-schedule.png]]
+
+** Switching Penalty
+- Use link estimation algorithm to predict data rate
+- Goal: match satellites to ground staions at each time to maximize the value function
+
+** Model
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/model.png]]
+
+
+* Dataset
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/dataset-details.png]]
+
+* Ground stations
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/l2d2-setup.png]]
+
+* Microbenchmarks
+- Elevation
+- Weather
+
+* Elevation & Link Quality
+
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/x-band-signal-variation.png]]
+
+** Elevation & Link Quality
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/satellite-position.png]]
+
+* Impact of Weather on Link Quality
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/ka-band-signal-variation.png]]
+
+* Results
+- Link Quality Estimation
+- Data Download
+- Latency
+- Scheduling
+- Satellite Storage
+- Backhaul
+
+* Link Quality Estimation
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/snr-error.png]]
+
+** Data Rate Analysis
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/data-rate-error.png]]
+
+** Transfer Learning Analysis
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/days-training-set.png]]
+
+* Data Download
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/data-backlog.png]]
+
+* Latency
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/latency.png]]
+
+* Scheduling
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/scheduler-table.png]]
+
+* Satellite Storage
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/median-storage.png]]
+
+* Backhaul
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/cdf-data.png]]
+
+* Questions?
+Thanks!
+
+#+ATTR_HTML: :width 50% :height 50%
+[[./img/ua-networks.png]]
