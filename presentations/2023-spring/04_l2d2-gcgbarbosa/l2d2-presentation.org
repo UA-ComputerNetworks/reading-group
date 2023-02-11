@@ -75,7 +75,7 @@ the same instant.
 The aim is: to find a scheduling algorithm that can optimize a pre-defined value function across time and across all satelliteground station pairs.
 
 ** Problem Formulation
-- Lets assume we have a set of satellites $S = {s_1, s_2, ... ,s_M}
+- Lets assume we have a set of satellites $S = {s_1, s_2, ... ,s_M}$
 - Each satellite $s_i$ is defined by a TLE.
 - The authors define the value function $\phi(x, t)$ which models the amount of data transmited to earth.
 - Where $x \in X_i^t$ is the subset of bits that can be transfered from the satellite to the ground station.
